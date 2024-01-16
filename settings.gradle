@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://artifactory.cloud.capitalone.com/artifactory/maven-internalfacing/'}
+    }
+}
+
+rootProject.name = 'identity-platform-policy-core-lite'
+include 'decision-policy'
+include 'config-management-policy'
+include 'sdk'

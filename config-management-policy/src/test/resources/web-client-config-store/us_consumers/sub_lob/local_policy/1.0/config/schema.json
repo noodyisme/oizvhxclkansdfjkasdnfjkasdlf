@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "type": "object",
+  "required": [
+    "param-A",
+    "param-B",
+    "param-bool",
+    "param-int",
+    "param-num",
+    "param-array"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "param-A": {
+      "type": "string"
+    },
+    "param-B": {
+      "type": "string"
+    },
+    "param-bool": {
+      "type": "boolean"
+    },
+    "param-int": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 90
+    },
+    "param-num": {
+      "type": "number",
+      "maximum": 0.9
+    },
+    "param-array": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

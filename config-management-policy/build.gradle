@@ -1,0 +1,5 @@
+dependencies {
+    api project(path: ':sdk')
+}
+group 'com.capitalone.identity.platform.policy-core-lite'
+description 'PCLite config-management-policy module'

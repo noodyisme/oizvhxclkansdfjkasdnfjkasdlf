@@ -1,0 +1,6 @@
+dependencies {
+    api project(path: ':sdk')
+    implementation project(path: ':config-management-policy')
+}
+group 'com.capitalone.identity.platform.policy-core-lite'
+description 'PCLite decision-policy module'

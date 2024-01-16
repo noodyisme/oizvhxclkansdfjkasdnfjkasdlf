@@ -1,0 +1,8 @@
+{
+  "param-A":  "ZZZ_A",
+  "param-B":  "ZZZ_B",
+  "param-bool":  false,
+  "param-int":  1,
+  "param-num":  0.5,
+  "param-array": [ "AA", "BB", "CC" ]
+}

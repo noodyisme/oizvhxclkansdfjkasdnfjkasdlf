@@ -1,0 +1,47 @@
+# -*- mode: yaml -*-
+---
+bogie:
+  name: identity-builder-policy-core-lite
+  asv: ASVIDENTITYPOLICYSERVICES
+  ba: BAIDENTITYPOLICYSERVICES
+  component: Identity Builder Policy Core
+  owner: platformers@capitalone.com
+  team_name: Platformers
+  artemis_enabled: no
+  artemis_onboarding_enabled: no
+  artemis_apptype: library-package
+  artemis_assessment_owner: YAV815
+
+pipeline:
+  managed: yes
+  ci_server: identitypl-n1jenkins
+  flavor: library-package
+  feature_toggles:
+    gitversion_enabled: yes
+  tasks:
+    build:
+      tool: gradle
+      filesToStash: build/classes/**
+      withAwsCredentials: true
+      withProxy: false
+      gradle:
+        tasks: clean build codeCoverageReport --info
+        coverageReports: build/**/*.xml
+        withJunitReport: true
+        image: artifactory.cloud.capitalone.com/bacoepengineeringexcellence-docker/java-docker-ubuntu:17-ubuntu20.04
+        withDockerSock: true
+      artifact:
+        repository: gradle
+        tasks: clean publish
+        image: artifactory.cloud.capitalone.com/bacoepengineeringexcellence-docker/java-docker-ubuntu:17-ubuntu20.04
+        withDockerSock: true
+    code_analysis:
+      sonar:
+        projectKey: identity-builder-policy-core-lite
+        withQualityGateCheck: true
+        opts:
+          - -Dsonar.projectKey="identity-builder-policy-core-lite"
+          - -Dsonar.java.binaries="config-management-policy/build/classes,decision-policy/build/classes,sdk/build/classes"    # Default location for gradle, change as necessary
+          - -Dsonar.sources="config-management-policy/src/main/java,decision-policy/src/main/java,sdk/src/main/java"
+          - -Dsonar.coverage.jacoco.xmlReportPaths="build/reports/jacoco/codeCoverageReport/*.xml"
+
